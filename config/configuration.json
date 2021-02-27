@@ -1,0 +1,7 @@
+{
+  "LOG_LEVEL": "trace",
+  "ELASTICSEARCH_HOST": "localhost:9200",
+  "INDEX_NAME_PREFIX": "whatsapp-chat",
+  "SOURCE_FOLDER": "processed",
+  "INDEX_DOCUMENT_ERROR": "INDEX_DOCUMENT_ERROR"
+}
