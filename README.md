@@ -1,6 +1,6 @@
 ## Whatsapp Chat Indexing to Elasticsearch
 
-Application can be used to parse a **Whatsapp Chat Backup File** and index it into elasticsearch.
+Application can be used to parse a **Whatsapp Chat Export File [txt file]** and index it into elasticsearch.
 
 The file is processed into a json file using awk and these json files are then processed by node application to index into elasticsearch
 
