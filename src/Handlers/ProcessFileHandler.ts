@@ -26,6 +26,7 @@ export class ProcessFileHandler {
       const response = await this.processDocumentAsStack(fileData);
       return response;
     } catch (error) {
+      console.log(`Failed to process file: ${fileName}`);
       throw error;
     }
   }
