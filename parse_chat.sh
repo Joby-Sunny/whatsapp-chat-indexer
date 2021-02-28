@@ -14,15 +14,14 @@ for file in "$@"; do
   # Base file will have message lines that span multiple lines;These are not easily processed. So the original file is formatted to make is easily processable
   awk '
   BEGIN{
-    current_line="";
   }
-
+  
   {
-    if(substr($1,length($1))=="," && NF>4) {
-        printf("%s\n",current_line);
-        current_line=$0;
+    if($1 ~ /^[0-9]+\/[0-9]+\/[0-9]+\,/) {
+      printf("%s\n",current_line);
+      current_line=$0;
     } else {
-        current_line=current_line" "$0;
+      current_line=current_line" "$0;
     }
   }
 
@@ -40,7 +39,7 @@ for file in "$@"; do
 
   {
     if(date[1] && date[2] && date[3] && time[1] && time[2] && chat[1] && chat[2]) {
-      printf("{\"month\":\"%s\",\"day\":\"%s\",\"year\":\"%s\",\"hour\":\"%s\",\"minute\":\"%s\",\"name\":\"%s\",\"message\":\"%s\"},", date[1], date[2], date[3],time[1], time[2], chat[1], chat[2]);
+      printf("\n{\"month\":\"%s\",\"day\":\"%s\",\"year\":\"%s\",\"hour\":\"%s\",\"minute\":\"%s\",\"name\":\"%s\",\"message\":\"%s\"},", date[1], date[2], date[3],time[1], time[2], chat[1], chat[2]);
     }
   }
     
@@ -55,7 +54,7 @@ for file in "$@"; do
   }
 
   END{
-    printf("{\"month\":\"%s\",\"day\":\"%s\",\"year\":\"%s\",\"hour\":\"%s\",\"minute\":\"%s\",\"name\":\"%s\",\"message\":\"%s\"}]", date[1], date[2], date[3],time[1], time[2], chat[1], chat[2]);
+    printf("\n{\"month\":\"%s\",\"day\":\"%s\",\"year\":\"%s\",\"hour\":\"%s\",\"minute\":\"%s\",\"name\":\"%s\",\"message\":\"%s\"}\n]", date[1], date[2], date[3],time[1], time[2], chat[1], chat[2]);
   }
   ' "$formatted_file" >>"$json_file"
 done
